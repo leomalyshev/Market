@@ -1,4 +1,6 @@
-﻿using Market.DB;
+﻿using System.Text;
+using Market.DB;
+using Market.DTO;
 using Market.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,41 +11,34 @@ namespace Market.Controllers
     [Route("[controller]")]
     public class ProductController : Controller
     {
+        private readonly IProductRepo _repo;
+
+        public ProductController(IProductRepo repo)
+        {
+            _repo = repo;
+        }
+
         [HttpPost(template: "addproduct")]
-        public ActionResult AddProduct(string name, string description)
+        public ActionResult AddProduct(ProductViewModel productViewModel)
         {
             try
             {
-                using (var ctx = new ProductContext())
-                {
-                    if (ctx.Products.Count(x => x.Name.ToLower() == name.ToLower()) > 0)
-                    {
-                        return StatusCode(409);
-                    }
-
-                    ctx.Products.Add(new Product { Name = name, Description = description });
-                    ctx.SaveChanges();
-                }
-
+                _repo.AddProduct(productViewModel);
+                
                 return Ok();
             }
             catch
             {
-                return StatusCode(500);
+                return StatusCode(409);
             }
         }
 
         [HttpGet(template: "getproducts")]
-        public ActionResult<IEnumerable<Product>> GetProducts()
+        public ActionResult<IEnumerable<ProductViewModel>> GetProducts()
         {
             try
             {
-                using (var ctx = new ProductContext())
-                {
-                    var list = ctx.Products.Select(x => new Product
-                        { Id = x.Id, Name = x.Name, Description = x.Description }).ToList();
-                    return list;
-                }
+                return Ok(_repo.GetProducts());
             }
             catch
             {
@@ -101,6 +96,24 @@ namespace Market.Controllers
             {
                 return StatusCode(500);
             }
+        }
+
+        [HttpGet(template: "getproductscsv")]
+        public FileContentResult GetProductsCsv()
+        {
+            var content =  _repo.GetProductsCsv();
+            return File(new UTF8Encoding().GetBytes(content), "text/csv", "report.csv");
+        }
+
+        [HttpGet(template: "getproductscsvurl")]
+        public ActionResult<string> GetProductsCsvUrl()
+        {
+            var content = _repo.GetProductsCsv();
+            string filename = "products" + DateTime.Now.ToBinary().ToString() + ".csv";
+
+            System.IO.File.WriteAllText(Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles", filename), content);
+
+            return "https://" + Request.Host + "/static/" + filename;
         }
     }
 }

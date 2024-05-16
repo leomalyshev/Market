@@ -11,10 +11,18 @@ namespace Market.DB
 
         private string _connectionString;
 
+        public ProductContext()
+        {
+        }
+
+        public ProductContext(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies()
-                .UseNpgsql("Host=localhost;Port=5432;Username=test;Password=Test1234;Database=Market");
+                .UseNpgsql(_connectionString);
             base.OnConfiguring(optionsBuilder);
         }
 
@@ -75,7 +83,6 @@ namespace Market.DB
                     .HasForeignKey(ps => ps.ProductId);
             });
 
-            //создание, удаление групп
         }
     }
 }
