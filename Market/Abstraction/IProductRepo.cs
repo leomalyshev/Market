@@ -7,5 +7,6 @@ namespace Market
         public void AddProduct(ProductViewModel productViewModel);
         public IEnumerable<ProductViewModel> GetProducts();
         public string GetProductsCsv();
+        public bool CheckProduct(int productId);
     }
 }

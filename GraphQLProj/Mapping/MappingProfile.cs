@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Market.DTO;
-using Market.Models;
+using GraphQLProj.DTO;
+using GraphQLProj.Models;
 
-namespace Market.Mapping
+namespace GraphQLProj.Mapping
 {
     public class MappingProfile : Profile
     {
@@ -10,7 +10,6 @@ namespace Market.Mapping
         {
             CreateMap<Product, ProductViewModel>().ReverseMap();
             CreateMap<Category, CategoryViewModel>().ReverseMap();
-            CreateMap<Storage, StorageViewModel>().ReverseMap();
         }
     }
 }

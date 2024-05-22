@@ -4,6 +4,7 @@ using Market.DTO;
 using Market.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Path = System.IO.Path;
 
 namespace Market.Controllers
 {
@@ -114,6 +115,12 @@ namespace Market.Controllers
             System.IO.File.WriteAllText(Path.Combine(Directory.GetCurrentDirectory(), "StaticFiles", filename), content);
 
             return "https://" + Request.Host + "/static/" + filename;
+        }
+
+        [HttpGet(template: "checkproduct")]
+        public ActionResult<bool> CheckProduct(int productId)
+        {
+            return Ok(_repo.CheckProduct(productId));
         }
     }
 }
