@@ -7,9 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Market", "Market.csproj", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQLProj", "..\GraphQLProj\GraphQLProj.csproj", "{DD278AFA-5B62-4592-9CA0-B14C21E01559}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Storage", "..\Storage\Storage.csproj", "{0E380BAA-96A4-4013-AC3E-823CC3E33257}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Storage", "..\Storage\Storage.csproj", "{0E380BAA-96A4-4013-AC3E-823CC3E33257}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageGraphQL", "..\StorageGraphQL\StorageGraphQL.csproj", "{D781F800-508A-4119-8E2F-2B1EC2227CF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StorageGraphQL", "..\StorageGraphQL\StorageGraphQL.csproj", "{D781F800-508A-4119-8E2F-2B1EC2227CF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecurityMarket", "..\SecurityMarket\SecurityMarket.csproj", "{531FB1E8-BF27-421A-B093-D1449202D823}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "..\DTO\DTO.csproj", "{867F8763-15E1-47AA-A9A6-87184E529A0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{D781F800-508A-4119-8E2F-2B1EC2227CF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D781F800-508A-4119-8E2F-2B1EC2227CF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D781F800-508A-4119-8E2F-2B1EC2227CF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{531FB1E8-BF27-421A-B093-D1449202D823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{531FB1E8-BF27-421A-B093-D1449202D823}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{531FB1E8-BF27-421A-B093-D1449202D823}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{531FB1E8-BF27-421A-B093-D1449202D823}.Release|Any CPU.Build.0 = Release|Any CPU
+		{867F8763-15E1-47AA-A9A6-87184E529A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{867F8763-15E1-47AA-A9A6-87184E529A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{867F8763-15E1-47AA-A9A6-87184E529A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{867F8763-15E1-47AA-A9A6-87184E529A0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
