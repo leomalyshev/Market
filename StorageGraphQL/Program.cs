@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using StorageGraphQL.Abstraction;
 using StorageGraphQL.DB;
+using StorageGraphQL.GraphQLServices.Mutation;
 using StorageGraphQL.GraphQLServices.Query;
 using StorageGraphQL.Repo;
 
@@ -29,10 +30,10 @@ namespace StorageGraphQLGraphQL
             config.AddJsonFile("appsettings.json");
             var cfg = config.Build();
             
-            builder.Services.AddScoped<ProductStorageRepo>().AddGraphQLServer().AddQueryType<Query>();
-            builder.Services.AddScoped<IProductStorageRepo, ProductStorageRepo>();
+            builder.Services.AddSingleton<ProductStorageRepo>().AddGraphQLServer().AddQueryType<Query>().AddMutationType<Mutation>(); ;
+            builder.Services.AddSingleton<IProductStorageRepo, ProductStorageRepo>();
 
-            builder.Services.AddScoped<ProductStorageContext>(serviceProvider =>
+            builder.Services.AddSingleton<ProductStorageContext>(serviceProvider =>
             {
                 var connectionString = cfg.GetConnectionString("db");
                 return new ProductStorageContext(connectionString);

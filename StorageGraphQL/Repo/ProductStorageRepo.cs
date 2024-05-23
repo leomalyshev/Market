@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Castle.Components.DictionaryAdapter.Xml;
-using Microsoft.Extensions.Caching.Memory;
 using StorageGraphQL.Abstraction;
 using StorageGraphQL.DB;
 using StorageGraphQL.DTO;
@@ -19,19 +17,21 @@ public class ProductStorageRepo : IProductStorageRepo
         _context = context;
     }
 
-    public void AddProductStorage(ProductStorageViewModel productStorageViewModel)
+    public int? AddProductStorage(ProductStorageViewModel productStorageViewModel)
     {
-        _context.Add(_mapper.Map<ProductStorage>(productStorageViewModel));
+        var entity = _mapper.Map<ProductStorage>(productStorageViewModel);
+        _context.Add(entity);
         _context.SaveChanges();
+        return entity.ProductId;
     }
 
     public IEnumerable<int?> GetProductsIds(int? storageId)
     {
         return _context.ProductStorages.Where(x => x.StorageId == storageId).Select(x => x.ProductId).ToList();
     }
-    public IEnumerable<int?> GetProducts()
+    public IEnumerable<ProductStorageViewModel> GetProducts()
     {
-        return _context.ProductStorages.Select(x => x.ProductId).ToList();
+        return _context.ProductStorages.Select(_mapper.Map<ProductStorageViewModel>).ToList();
     }
     public void RemoveProductStorage(int? productId, int? storageId)
     {

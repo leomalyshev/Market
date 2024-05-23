@@ -7,7 +7,7 @@ namespace StorageGraphQL.GraphQLServices.Query
 {
     public class Query
     {
-        public IEnumerable<int?> GetProducts([Service] ProductStorageRepo productRepo)
+        public IEnumerable<ProductStorageViewModel> GetProducts([Service] ProductStorageRepo productRepo)
         {
             return productRepo.GetProducts();
         }
